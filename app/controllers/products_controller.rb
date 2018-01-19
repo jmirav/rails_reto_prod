@@ -11,10 +11,10 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    # @categories = Category.find(params[:category_id])
+    # @categories = Category.find(params[:category_ids])
     if @product.save
       # @product.categories << @categories
-      redirect_to products_path, notice: "El producto ha sido publicado con éxito"
+  	   redirect_to products_path, notice: "El producto ha sido publicado con éxito"
     else
       render :new
     end
@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
   def update
     product = Product.find(params[:id])
     if product.update(product_params)
-      redirect_to products_path, notice: "El producto ha sido modificado con éxito"
+      redirect_to products_path
     else
       render :edit
     end
@@ -42,11 +42,11 @@ class ProductsController < ApplicationController
     product = Product.find(params[:id])
     product.destroy
 
-    redirect_to products_path, notice: "El producto fue eliminado con éxito"
+    redirect_to products_path
   end
 
   private
     def product_params
-      params.require(:product).permit(:name, :price)
+      params.require(:product).permit(:name, :price, :category_ids => [])
     end
 end
