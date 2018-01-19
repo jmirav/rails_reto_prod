@@ -16,13 +16,8 @@
           <% @products.each do |product| %>
             <tr>
               <td><%= product.name %></td>
-              <td><%= product.price %></td>
-              <td>
-                <% cats = product.categories.ids %>
-                <% cats.each do |c| %>
-                  <%= @categories.find_by(id: c).name %>
-                <% end %>
-              </td>
+              <td><%= number_to_currency(product.price, precision: 2) %></td>
+              <td><%= product.categories.pluck(:name).join(", ") %></td>
               <td>
                 <%= link_to "Editar", edit_product_path(product) %>
                 <%= link_to "Eliminar", product, method: :delete %>
