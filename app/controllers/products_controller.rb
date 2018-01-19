@@ -11,18 +11,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    # @categories = Category.find(params[:category_ids])
     if @product.save
-      # @product.categories << @categories
-  	   redirect_to products_path, notice: "El producto ha sido publicado con éxito"
+      redirect_to products_path
     else
       render :new
     end
   end
-
-  # def show
-  #   @product = Product.find(params[:id])
-  # end
 
   def edit
     @categories = Category.all
